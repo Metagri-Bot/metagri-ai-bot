@@ -52,6 +52,11 @@
       pending.className = "panel";
       pending.textContent = "検索中...";
       messages.prepend(pending);
+      const local = publicFastAnswer(question);
+      if (local) {
+        pending.innerHTML = render(local);
+        return;
+      }
       try {
         const response = await fetch("/api/chat", {
           method: "POST",
@@ -64,6 +69,35 @@
         pending.textContent = "回答の取得に失敗しました。時間をおいて再度お試しください。";
       }
     });
+
+    function publicFastAnswer(question) {
+      const q = question.toLowerCase();
+      if (["売上", "契約", "予算", "資金源", "ライセンス", "アカウント", "請求書", "銀行", "パスワード", "認証"].some(term => question.includes(term))) {
+        return {
+          answer: "手元の公開情報では確認できません。Metagri研究所の公開版AI案内Botでは、売上・契約・予算・資金源・ライセンス・アカウント情報など、公開済みページで確認できない内部情報には回答しません。\n\n公開済みの取り組みや公式ページにある内容について質問してください。",
+          evidence: [{file_name:"public_refusal_policy.md", heading:"公開版チャットボット 非回答方針", line:1}]
+        };
+      }
+      if (q.includes("milk monster") || question.includes("ミルクモンスター") || q.includes("cwbj")) {
+        return {
+          answer: "手元の公開情報では確認できません。Metagri研究所の公開版AI案内Botでは、公式サイトや公開記事で確認できる内容に限って回答します。\n\n公開済みページがある取り組みについて質問するか、公式発表後にあらためて確認してください。",
+          evidence: [{file_name:"public_refusal_policy.md", heading:"公開版チャットボット 非回答方針", line:1}]
+        };
+      }
+      if (q.includes("metagri") && ["取り組み", "プロジェクト", "重点", "進行中"].some(term => question.includes(term))) {
+        return {
+          answer: "Metagri研究所の主な取り組みは、以下のように整理できます。\n\n- 農業AI通信: 農家向けにAI活用の入口を届けるWebメディア。\n- 白井市PR動画コンテスト: 動画生成AIを活用した自治体連携型の地域PR施策。\n- MLTT / MLTG: コミュニティ貢献をトークンやNFT特典に接続する仕組み。\n- 未来の農業シミュレーター: Roblox上で農業体験を提供するメタバース施策。\n- 農業AIハッカソン: 農家や地域課題を起点に、生成AIでプロトタイプを作る共創プログラム。\n- 4年間DAOレポート: コミュニティ継続の実績をデータで示す取り組み。",
+          evidence: [{file_name:"metagri_overview_public.md", heading:"Metagri研究所 公開用サマリー", line:1}]
+        };
+      }
+      if (q.includes("metagri") && (question.includes("とは") || question.includes("何"))) {
+        return {
+          answer: "Metagri研究所は、株式会社農情人が運営する、農業×新技術の実験コミュニティです。\n\n- Discordを中心に、農業とweb3、生成AI、メタバースを組み合わせた取り組みを行っています。\n- コンセプトは「Meta（超越）× Agriculture（農業）」です。\n- 農業の固定観念をテクノロジーで超越し、新しい農業の関わり方を作ることを目指しています。",
+          evidence: [{file_name:"metagri_overview_public.md", heading:"Metagri研究所 公開用サマリー", line:1}]
+        };
+      }
+      return null;
+    }
 
     function render(payload) {
       const body = escapeHtml(payload.answer).replaceAll("\n", "<br>");
