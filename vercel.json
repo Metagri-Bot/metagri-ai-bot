@@ -6,6 +6,9 @@
   "functions": {
     "api/chat.py": {
       "includeFiles": "{canonical_qa_public.json,sources_public.json,data_public/index.json,knowledge/public_release/**}"
+    },
+    "api/ask.py": {
+      "includeFiles": "{canonical_qa_public.json,sources_public.json,data_public/index.json,knowledge/public_release/**,api/chat.py}"
     }
   }
 }
