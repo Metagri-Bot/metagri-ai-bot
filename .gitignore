@@ -4,6 +4,7 @@ __pycache__/
 .venv/
 venv/
 data/
-data_public/
+data_public/*
+!data_public/index.json
 server.log
 server.err

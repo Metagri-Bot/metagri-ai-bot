@@ -1,0 +1,6 @@
+{
+  "buildCommand": "python ingest.py",
+  "env": {
+    "RAG_PROFILE": "public"
+  }
+}

@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Metagri AI案内Bot</title>
+  <style>
+    :root { color-scheme: light; --green:#2D6A4F; --yellow:#F4D35E; --ink:#1d2520; --line:#d8e0da; }
+    body { margin:0; font-family: system-ui, -apple-system, "Segoe UI", sans-serif; color:var(--ink); background:#f7faf8; }
+    header { background:var(--green); color:white; padding:18px 22px; }
+    h1 { margin:0; font-size:20px; letter-spacing:0; }
+    main { max-width:980px; margin:0 auto; padding:20px; }
+    form { display:grid; grid-template-columns:1fr auto; gap:10px; margin-bottom:18px; }
+    input { font-size:16px; padding:13px 14px; border:1px solid var(--line); border-radius:6px; min-width:0; }
+    button { border:0; background:var(--green); color:white; padding:0 18px; border-radius:6px; font-weight:700; cursor:pointer; }
+    .panel { background:white; border:1px solid var(--line); border-radius:8px; padding:16px; margin:12px 0; }
+    .question { font-weight:700; border-left:5px solid var(--yellow); padding-left:10px; }
+    .answer { line-height:1.8; }
+    .source-details { margin-top:14px; color:#526158; font-size:13px; }
+    .source-details summary { cursor:pointer; font-weight:700; }
+    .sources { margin:8px 0 0; padding-left:22px; }
+    .sources li { margin:5px 0; }
+    .empty { color:#526158; }
+    @media (max-width: 640px) {
+      form { grid-template-columns:1fr; }
+      button { min-height:44px; }
+    }
+  </style>
+</head>
+<body>
+  <header><h1>Metagri AI案内Bot</h1></header>
+  <main>
+    <form id="chat-form">
+      <input id="question" autocomplete="off" placeholder="例: Metagri研究所の取り組みは？">
+      <button type="submit">質問</button>
+    </form>
+    <div id="messages" class="empty">公開情報にもとづいて回答します。確認できない内容は、その旨を返します。</div>
+  </main>
+  <script>
+    const form = document.querySelector("#chat-form");
+    const input = document.querySelector("#question");
+    const messages = document.querySelector("#messages");
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      const question = input.value.trim();
+      if (!question) return;
+      messages.classList.remove("empty");
+      messages.insertAdjacentHTML("afterbegin", `<div class="panel question">${escapeHtml(question)}</div>`);
+      input.value = "";
+      const pending = document.createElement("div");
+      pending.className = "panel";
+      pending.textContent = "検索中...";
+      messages.prepend(pending);
+      try {
+        const response = await fetch("/api/chat", {
+          method: "POST",
+          headers: {"Content-Type": "application/json"},
+          body: JSON.stringify({question})
+        });
+        const payload = await response.json();
+        pending.innerHTML = render(payload);
+      } catch (error) {
+        pending.textContent = "回答の取得に失敗しました。時間をおいて再度お試しください。";
+      }
+    });
+
+    function render(payload) {
+      const body = escapeHtml(payload.answer).replaceAll("\n", "<br>");
+      const sources = (payload.evidence || []).map(item => (
+        `<li><strong>${escapeHtml(item.file_name)}:${item.line || 1}</strong> ${escapeHtml(item.heading || "")}</li>`
+      )).join("");
+      const sourceBlock = sources
+        ? `<details class="source-details"><summary>参照元（${payload.evidence.length}件）</summary><ul class="sources">${sources}</ul></details>`
+        : "";
+      return `<div class="answer">${body}</div>${sourceBlock}`;
+    }
+    function escapeHtml(value) {
+      return String(value).replace(/[&<>"']/g, char => ({ "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#039;" }[char]));
+    }
+  </script>
+</body>
+</html>
