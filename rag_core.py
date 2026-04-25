@@ -497,12 +497,20 @@ def canonical_answer_from_file(query: str, find_chunk) -> dict | None:
         item_id = item.get("id", "")
         is_overview = item_id in {"metagri_overview", "metagri_overview_public"}
         is_projects = item_id in {"metagri_projects", "metagri_projects_public"}
+        is_participation = item_id == "metagri_participation_public"
+        is_mltt_collect = item_id == "mltt_collect_public"
         project_terms = ("取り組み", "プロジェクト", "重点", "進行中")
+        participation_terms = ("参加", "さんか", "入りたい", "参加方法", "会員証", "nft", "定例")
+        mltt_collect_terms = ("mltt", "トークン", "集め", "貯め", "もらう", "入手", "ウォレット")
         if is_overview and any(term in query for term in project_terms):
             continue
         if is_overview and not ("とは" in query or "何" in query):
             continue
         if is_projects and not any(term in query for term in project_terms):
+            continue
+        if is_participation and not any(term in normalized_query for term in participation_terms):
+            continue
+        if is_mltt_collect and not any(term in normalized_query for term in mltt_collect_terms):
             continue
         keywords = item.get("keywords", [])
         hits = 0
