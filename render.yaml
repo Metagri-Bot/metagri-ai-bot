@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: metagri-ai-bot
+    runtime: python
+    plan: free
+    buildCommand: python ingest.py
+    startCommand: python app.py
+    envVars:
+      - key: RAG_PROFILE
+        value: public
+      - key: HOST
+        value: 0.0.0.0

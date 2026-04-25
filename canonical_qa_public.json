@@ -1,0 +1,113 @@
+{
+  "description": "Metagri研究所サイト公開用の定番質問。公開済み情報だけで回答する。",
+  "items": [
+    {
+      "id": "metagri_overview_public",
+      "keywords": ["metagri", "研究所", "とは"],
+      "title": "Metagri研究所とは",
+      "answer": "Metagri研究所は、株式会社農情人が運営する、農業×新技術の実験コミュニティです。\n\n- Discordを中心に、農業とweb3、生成AI、メタバースを組み合わせた取り組みを行っています。\n- コンセプトは「Meta（超越）× Agriculture（農業）」です。\n- 農業の固定観念をテクノロジーで超越し、新しい農業の関わり方を作ることを目指しています。",
+      "evidence": [
+        {"file_name": "metagri_overview_public.md", "heading": "Metagri研究所 公開用サマリー", "text": "公開用に整理したMetagri研究所の全体像。"}
+      ]
+    },
+    {
+      "id": "metagri_projects_public",
+      "keywords": ["metagri", "取り組み", "プロジェクト"],
+      "title": "Metagri研究所の主な取り組み",
+      "answer": "Metagri研究所の主な取り組みは、以下のように整理できます。\n\n- 農業AI通信: 農家向けにAI活用の入口を届けるWebメディア。\n- 白井市PR動画コンテスト: 動画生成AIを活用した自治体連携型の地域PR施策。\n- MLTT / MLTG: コミュニティ貢献をトークンやNFT特典に接続する仕組み。\n- 未来の農業シミュレーター: Roblox上で農業体験を提供するメタバース施策。\n- 農業AIハッカソン: 農家や地域課題を起点に、生成AIでプロトタイプを作る共創プログラム。\n- 4年間DAOレポート: コミュニティ継続の実績をデータで示す取り組み。",
+      "evidence": [
+        {"file_name": "metagri_overview_public.md", "heading": "Metagri研究所 公開用サマリー", "text": "公開可能な主要活動の整理。"}
+      ]
+    },
+    {
+      "id": "metagri_participation_public",
+      "keywords": ["metagri", "研究所", "参加", "さんか", "活動", "入りたい", "参加方法", "会員証nft", "定例mtg"],
+      "title": "Metagri研究所の活動に参加したい",
+      "answer": "Metagri研究所の活動に参加したい場合は、まず会員証NFTを獲得してください。\n\n会員証NFTを獲得すると、定例MTGや各プロジェクトに参加できるようになります。\n\n具体的な獲得方法や最新の案内は、Metagri研究所の公式サイト・Discord・運営からの案内を確認してください。",
+      "evidence": [
+        {"file_name": "membership_participation_public.md", "heading": "Metagri研究所 参加方法 公開用サマリー", "text": "会員証NFTを獲得すると、定例MTGやプロジェクトへの参加が可能になる。"}
+      ]
+    },
+    {
+      "id": "agri_ai_news_public",
+      "keywords": ["農業ai通信", "とは"],
+      "title": "農業AI通信とは",
+      "answer": "農業AI通信は、農家のために、農家の言葉でAI活用を伝えるWebメディアです。\n\n「AIに興味はあるけれど、農業でどう使えばよいかわからない」という人に向けて、ChatGPTなどの生成AIの活用事例や入門情報を届けます。",
+      "evidence": [
+        {"file_name": "agri_ai_news_public.md", "heading": "農業AI通信 公開用サマリー", "text": "農業AI通信の公開コンセプト。"}
+      ]
+    },
+    {
+      "id": "mltt_public",
+      "keywords": ["mltt", "mltg"],
+      "title": "MLTTとMLTG",
+      "answer": "MLTTは、Metagri研究所での活動や貢献に応じて配布される感謝トークンです。MLTGは、MLTTと引き換えるNFT形式の特典引換証です。\n\nMetagri研究所では、コミュニティ内の貢献を可視化し、農産物やグッズ、イベントなどの特典へつなげる仕組みとして活用しています。",
+      "evidence": [
+        {"file_name": "mltt_farmfi_public.md", "heading": "MLTT / MLTG 公開用サマリー", "text": "MLTT/MLTGの公開情報。"}
+      ]
+    },
+    {
+      "id": "mltt_collect_public",
+      "keywords": ["mltt", "集め", "集めたい", "貯め", "獲得", "もらう", "入手", "ウォレット", "会員証nft"],
+      "title": "MLTTを集めたい",
+      "answer": "MLTTを集めるには、まずweb3ウォレットを準備し、Metagri研究所の会員証NFTを獲得してください。\n\nそのうえで、コミュニティ内で活動・貢献を行うと、MLTTの配布対象になります。具体的には、Metagri日誌の更新、定例MTGへの参加、ニュース共有、音声発信などが対象です。\n\n最新の配布条件や申請方法は、Metagri研究所の公式サイト・Discord・運営からの案内を確認してください。",
+      "evidence": [
+        {"file_name": "mltt_farmfi_public.md", "heading": "MLTT / MLTG 公開用サマリー", "text": "MLTTを集める前提としてweb3ウォレットの準備と会員証NFTの獲得が必要。Metagri日誌更新、定例MTG参加、ニュース共有、音声発信などで配布される。"}
+      ]
+    },
+    {
+      "id": "shiroi_public",
+      "keywords": ["白井市", "コンテスト"],
+      "title": "白井市PR動画コンテスト",
+      "answer": "白井市PR動画コンテストは、白井市とMetagri研究所が主催する、動画生成AIを活用したPR動画コンテストです。\n\nテーマは「白井で叶えるゆとりある暮らし」。20代〜30代の子育て世帯が白井市に住みたいと思えるような動画を募集しています。",
+      "evidence": [
+        {"file_name": "shiroi_video_contest_public.md", "heading": "白井市PR動画コンテスト 公開用サマリー", "text": "公開済みLP・参加規約に基づく整理。"}
+      ]
+    },
+    {
+      "id": "future_farm_public",
+      "keywords": ["未来の農業シミュレーター", "roblox", "メタバース"],
+      "title": "未来の農業シミュレーター",
+      "answer": "未来の農業シミュレーターは、Metagri研究所がRoblox上で展開する農業メタバースゲームです。\n\nプレイヤーはバーチャル空間で作物の栽培や収穫を体験し、農業の基礎知識や楽しさを学べます。",
+      "evidence": [
+        {"file_name": "future_farm_simulator_public.md", "heading": "未来の農業シミュレーター 公開用サマリー", "text": "Roblox農業メタバースの公開情報。"}
+      ]
+    },
+    {
+      "id": "ai_hackathon_public",
+      "keywords": ["aiハッカソン", "ハッカソン", "vibe coding"],
+      "title": "農業AIハッカソン",
+      "answer": "農業AIハッカソンは、農家や地域のリアルな課題を起点に、生成AIとVibe Codingでプロトタイプを作る共創型プログラムです。\n\n非エンジニアでも生成AIとの対話でアイデアを形にできる点が特徴です。",
+      "evidence": [
+        {"file_name": "ai_hackathon_public.md", "heading": "農業AIハッカソン 公開用サマリー", "text": "公開済みAIハッカソン情報。"}
+      ]
+    },
+    {
+      "id": "dao_report_public",
+      "keywords": ["dao", "4年", "レポート"],
+      "title": "4年間DAOレポート",
+      "answer": "Metagri研究所の4年間DAOレポートは、農業DAOが継続してきた理由を、コミュニティ運営やトークン活用のデータから整理した公開レポートです。\n\n「続くDAO」の設計原則や、コミュニティ成長の実績を知る入口として使えます。",
+      "evidence": [
+        {"file_name": "dao_report_public.md", "heading": "4年間DAOレポート 公開用サマリー", "text": "公開済み4年間DAOレポートの整理。"}
+      ]
+    },
+    {
+      "id": "public_sensitive_info",
+      "keywords": ["売上", "契約", "予算", "資金源", "ライセンス", "アカウント", "請求書", "銀行", "パスワード", "認証"],
+      "title": "公開版で回答しない情報",
+      "answer": "手元の公開情報では確認できません。Metagri研究所の公開版AI案内Botでは、売上・契約・予算・資金源・ライセンス・アカウント情報など、公開済みページで確認できない内部情報には回答しません。\n\n公開済みの取り組みや公式ページにある内容について質問してください。",
+      "evidence": [
+        {"file_name": "public_refusal_policy.md", "heading": "公開版チャットボット 非回答方針", "text": "公開版では内部情報・契約・売上・認証情報などに回答しない。"}
+      ]
+    },
+    {
+      "id": "public_unconfirmed_project",
+      "keywords": ["milk monster", "ミルクモンスター", "cwbj"],
+      "title": "公開情報で確認できない企画",
+      "answer": "手元の公開情報では確認できません。Metagri研究所の公開版AI案内Botでは、公式サイトや公開記事で確認できる内容に限って回答します。\n\n公開済みページがある取り組みについて質問するか、公式発表後にあらためて確認してください。",
+      "evidence": [
+        {"file_name": "public_refusal_policy.md", "heading": "公開版チャットボット 非回答方針", "text": "公開版では未公開企画・内部検討資料・公式サイトで確認できない将来予定には回答しない。"}
+      ]
+    }
+  ]
+}

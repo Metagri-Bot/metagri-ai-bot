@@ -1,0 +1,56 @@
+{
+  "project": "Metagri RAG Chatbot Public",
+  "description": "Metagri研究所サイト公開用。公開確認済み情報だけをRAGソースにする。",
+  "trusted_local_sources": [
+    {
+      "name": "public release summaries",
+      "path": "knowledge/public_release/*.md",
+      "type": "markdown_glob",
+      "priority": 1,
+      "notes": "公開用に整えたサマリーのみ。Notion内部情報・Discord内部情報は含めない。"
+    }
+  ],
+  "public_reference_sources": [
+    {
+      "name": "Metagri研究所 公式サイト",
+      "url": "https://metagri-labo.com/",
+      "notes": "公式トップ、新着情報、主要導線。"
+    },
+    {
+      "name": "農業AI通信 創刊記事",
+      "url": "https://metagri-labo.com/ai-guide/start/",
+      "notes": "農業AI通信の公開コンセプト。"
+    },
+    {
+      "name": "MLTT配布条件と交換内容一覧",
+      "url": "https://metagri-labo.com/token-economy/",
+      "notes": "MLTT/MLTGの公開根拠。"
+    },
+    {
+      "name": "白井市PR動画コンテスト参加規約",
+      "url": "https://metagri-labo.com/metagri-shiroi-pr-video-contest-term/",
+      "notes": "応募条件・作品形式・審査基準。"
+    },
+    {
+      "name": "未来の農業シミュレーター",
+      "url": "https://metagri-labo.com/future-farm-simulator/",
+      "notes": "Roblox農業メタバースの公開根拠。"
+    },
+    {
+      "name": "4年間DAOレポート",
+      "url": "https://metagri-labo.com/metagridao-research-paper-202603/",
+      "notes": "続くDAO・コミュニティ実績の公開根拠。"
+    },
+    {
+      "name": "あなたの町でAIハッカソン",
+      "url": "https://metagri-labo.com/ai-hackathon-revitalization-2026/",
+      "notes": "地域課題AI共創プログラムの公開根拠。"
+    }
+  ],
+  "answer_policy": {
+    "must_cite_sources": true,
+    "refuse_when_low_evidence": true,
+    "default_language": "ja",
+    "style": "公開済み情報だけで回答する。未公開・内部検討は回答しない。"
+  }
+}
