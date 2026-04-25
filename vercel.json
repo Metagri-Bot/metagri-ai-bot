@@ -2,5 +2,15 @@
   "buildCommand": "python ingest.py",
   "env": {
     "RAG_PROFILE": "public"
+  },
+  "functions": {
+    "api/chat.py": {
+      "includeFiles": [
+        "canonical_qa_public.json",
+        "sources_public.json",
+        "data_public/index.json",
+        "knowledge/public_release/**"
+      ]
+    }
   }
 }
