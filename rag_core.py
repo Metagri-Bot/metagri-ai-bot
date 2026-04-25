@@ -311,7 +311,13 @@ def extract_evidence_sentences(query: str, chunks: list[dict], max_sentences: in
     evidence = []
     seen = set()
     for chunk in chunks:
-        sentences = [s.strip(" ・-*　") for s in SENTENCE_RE.split(chunk["text"]) if len(s.strip()) >= 25]
+        sentences = [
+            s.strip(" ・-*　")
+            for s in SENTENCE_RE.split(chunk["text"])
+            if len(s.strip()) >= 25
+            and not s.lstrip().startswith("#")
+            and not re.match(r"^(公開可否|更新日|参照元)\s*[:：]", s.strip())
+        ]
         ranked = []
         for sentence in sentences:
             if sentence.count("http") >= 1 and len(re.sub(r"https?://\S+", "", sentence).strip()) < 20:
@@ -584,13 +590,21 @@ def canonical_answer_from_file(query: str, find_chunk) -> dict | None:
         item_id = item.get("id", "")
         is_overview = item_id in {"metagri_overview", "metagri_overview_public"}
         is_projects = item_id in {"metagri_projects", "metagri_projects_public"}
+        is_participation = item_id in {"metagri_participation", "metagri_participation_public"}
+        is_mltt_collect = item_id in {"mltt_collect", "mltt_collect_public"}
         project_terms = ("取り組み", "プロジェクト", "重点", "進行中")
         overview_terms = ("とは", "何", "全体像", "教えて", "詳しく", "解説", "考察", "組織")
+        participation_terms = ("参加", "さんか", "入りたい", "参加方法", "会員証", "nft", "定例", "費用")
+        mltt_collect_terms = ("mltt", "トークン", "集め", "貯め", "もらう", "入手", "ウォレット")
         if is_overview and any(term in query for term in project_terms):
             continue
         if is_overview and not any(term in query for term in overview_terms):
             continue
         if is_projects and not any(term in query for term in project_terms):
+            continue
+        if is_participation and not any(term in normalized_query for term in participation_terms):
+            continue
+        if is_mltt_collect and not any(term in normalized_query for term in mltt_collect_terms):
             continue
         keywords = item.get("keywords", [])
         hits = 0
@@ -626,6 +640,7 @@ def canonical_answer_from_file(query: str, find_chunk) -> dict | None:
                 "metagri_projects_public",
                 "metagri_participation_public",
                 "metagri_participation",
+                "metagri_intern_public",
                 "shiroi_public",
                 "public_sensitive_info",
                 "public_unconfirmed_project",
@@ -682,6 +697,10 @@ def canonical_answer_from_file(query: str, find_chunk) -> dict | None:
             overview = next((row for row in scored_items if row[2].get("id") == "metagri_overview_public"), None)
             if overview:
                 scored_items = [overview]
+    if any(term in query for term in ("歴史", "軌跡", "沿革", "これまで", "歩み", "あゆみ")):
+        history = next((row for row in scored_items if row[2].get("id") == "metagri_history_public"), None)
+        if history:
+            scored_items = [history]
     scored_items.sort(key=lambda row: (row[0], -row[1]), reverse=True)
     hits, keyword_count, item = scored_items[0]
 
