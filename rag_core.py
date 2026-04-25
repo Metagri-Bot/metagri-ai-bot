@@ -23,6 +23,42 @@ CANONICAL_QA_PATH = Path(os.getenv("RAG_QA_FILE", ROOT / ("canonical_qa_public.j
 UNANSWERED_LOG_PATH = DATA_DIR / "unanswered_questions.jsonl"
 
 
+PUBLIC_FALLBACK_QA = {
+    "items": [
+        {
+            "id": "metagri_overview_public",
+            "keywords": ["metagri", "研究所", "とは"],
+            "answer": "Metagri研究所は、株式会社農情人が運営する、農業×新技術の実験コミュニティです。\n\n- Discordを中心に、農業とweb3、生成AI、メタバースを組み合わせた取り組みを行っています。\n- コンセプトは「Meta（超越）× Agriculture（農業）」です。\n- 農業の固定観念をテクノロジーで超越し、新しい農業の関わり方を作ることを目指しています。",
+            "evidence": [{"file_name": "metagri_overview_public.md", "heading": "Metagri研究所 公開用サマリー", "text": "公開用に整理したMetagri研究所の全体像。"}],
+        },
+        {
+            "id": "metagri_projects_public",
+            "keywords": ["metagri", "取り組み", "プロジェクト"],
+            "answer": "Metagri研究所の主な取り組みは、以下のように整理できます。\n\n- 農業AI通信: 農家向けにAI活用の入口を届けるWebメディア。\n- 白井市PR動画コンテスト: 動画生成AIを活用した自治体連携型の地域PR施策。\n- MLTT / MLTG: コミュニティ貢献をトークンやNFT特典に接続する仕組み。\n- 未来の農業シミュレーター: Roblox上で農業体験を提供するメタバース施策。\n- 農業AIハッカソン: 農家や地域課題を起点に、生成AIでプロトタイプを作る共創プログラム。\n- 4年間DAOレポート: コミュニティ継続の実績をデータで示す取り組み。",
+            "evidence": [{"file_name": "metagri_overview_public.md", "heading": "Metagri研究所 公開用サマリー", "text": "公開可能な主要活動の整理。"}],
+        },
+        {
+            "id": "metagri_participation_public",
+            "keywords": ["metagri", "研究所", "参加", "さんか", "活動", "入りたい", "参加方法", "会員証nft", "定例mtg"],
+            "answer": "Metagri研究所の活動に参加したい場合は、まず会員証NFTを獲得してください。\n\n会員証NFTを獲得すると、定例MTGや各プロジェクトに参加できるようになります。\n\n具体的な獲得方法や最新の案内は、Metagri研究所の公式サイト・Discord・運営からの案内を確認してください。",
+            "evidence": [{"file_name": "membership_participation_public.md", "heading": "Metagri研究所 参加方法 公開用サマリー", "text": "会員証NFTを獲得すると、定例MTGやプロジェクトへの参加が可能になる。"}],
+        },
+        {
+            "id": "public_sensitive_info",
+            "keywords": ["売上", "契約", "予算", "資金源", "ライセンス", "アカウント", "請求書", "銀行", "パスワード", "認証"],
+            "answer": "手元の公開情報では確認できません。Metagri研究所の公開版AI案内Botでは、売上・契約・予算・資金源・ライセンス・アカウント情報など、公開済みページで確認できない内部情報には回答しません。\n\n公開済みの取り組みや公式ページにある内容について質問してください。",
+            "evidence": [{"file_name": "public_refusal_policy.md", "heading": "公開版チャットボット 非回答方針", "text": "公開版では内部情報・契約・売上・認証情報などに回答しない。"}],
+        },
+        {
+            "id": "public_unconfirmed_project",
+            "keywords": ["milk monster", "ミルクモンスター", "cwbj"],
+            "answer": "手元の公開情報では確認できません。Metagri研究所の公開版AI案内Botでは、公式サイトや公開記事で確認できる内容に限って回答します。\n\n公開済みページがある取り組みについて質問するか、公式発表後にあらためて確認してください。",
+            "evidence": [{"file_name": "public_refusal_policy.md", "heading": "公開版チャットボット 非回答方針", "text": "公開版では未公開企画・内部検討資料・公式サイトで確認できない将来予定には回答しない。"}],
+        },
+    ]
+}
+
+
 JAPANESE_RE = re.compile(r"[\u3040-\u30ff\u3400-\u9fff]")
 WORD_RE = re.compile(r"[a-zA-Z0-9_]{2,}|[\u3040-\u30ff\u3400-\u9fff]{2,}")
 SENTENCE_RE = re.compile(r"(?<=[。！？!?])\s+|\n+")
@@ -488,9 +524,12 @@ def canonical_answer(query: str) -> dict | None:
 
 
 def canonical_answer_from_file(query: str, find_chunk) -> dict | None:
-    if not CANONICAL_QA_PATH.exists():
+    if CANONICAL_QA_PATH.exists():
+        data = json.loads(CANONICAL_QA_PATH.read_text(encoding="utf-8"))
+    elif RAG_PROFILE == "public":
+        data = PUBLIC_FALLBACK_QA
+    else:
         return None
-    data = json.loads(CANONICAL_QA_PATH.read_text(encoding="utf-8"))
     normalized_query = normalize(query)
     scored_items = []
     for item in data.get("items", []):
