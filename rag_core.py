@@ -677,6 +677,11 @@ def canonical_answer_from_file(query: str, find_chunk) -> dict | None:
             scored_items.append((hits, len(keywords), item))
     if not scored_items:
         return None
+    if "metagri" in normalized_query and any(term in query for term in ("とは", "何", "全体像")):
+        if not any(term in query for term in ("名前", "由来", "意味", "ネーミング", "命名")):
+            overview = next((row for row in scored_items if row[2].get("id") == "metagri_overview_public"), None)
+            if overview:
+                scored_items = [overview]
     scored_items.sort(key=lambda row: (row[0], -row[1]), reverse=True)
     hits, keyword_count, item = scored_items[0]
 
