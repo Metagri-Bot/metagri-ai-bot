@@ -1,5 +1,5 @@
 {
-  "buildCommand": "python ingest.py",
+  "buildCommand": "RAG_PROFILE=public python ingest.py",
   "env": {
     "RAG_PROFILE": "public"
   },

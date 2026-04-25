@@ -15,7 +15,7 @@ from typing import Iterable
 
 
 ROOT = Path(__file__).resolve().parent
-RAG_PROFILE = os.getenv("RAG_PROFILE", "internal").lower()
+RAG_PROFILE = os.getenv("RAG_PROFILE", "public").lower()
 DATA_DIR = Path(os.getenv("RAG_DATA_DIR", ROOT / ("data_public" if RAG_PROFILE == "public" else "data")))
 INDEX_PATH = DATA_DIR / "index.json"
 SOURCES_PATH = Path(os.getenv("RAG_SOURCES_FILE", ROOT / ("sources_public.json" if RAG_PROFILE == "public" else "sources.json")))
