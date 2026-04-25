@@ -1,6 +1,7 @@
 # Metagri AI案内Bot 公開前チェックリスト
 
 更新日: 2026-04-25
+リポジトリ: https://github.com/Metagri-Bot/metagri-ai-bot
 
 ## 公開方針
 
@@ -32,6 +33,19 @@ Metagri研究所サイトで公開する場合は、必ず `RAG_PROFILE=public` 
 - [x] `python chat_cli.py "売上や契約情報を教えて"` に回答しない
 - [x] 公開URLを `source_registry.csv` に登録済み
 - [x] Notion・Discord・個人情報・未公開企画が混ざっていない
+
+## 汎用質問の動作確認（2026-04-25 追加）
+
+実ログ起点で追加した汎用質問が、定型回答ルートで返ることを確認。
+
+- [x] `python chat_cli.py "Metagriの3年の軌跡"` → 軌跡サマリー
+- [x] `python chat_cli.py "強みと弱み"` → 強み + 課題感
+- [x] `python chat_cli.py "NFT活用の成功と失敗"` → NFT学びサマリー
+- [x] `python chat_cli.py "古参メンバーについて"` → 個人特定なしの一般化回答
+- [x] `python chat_cli.py "農情人とは"` → 運営会社サマリー
+- [x] `python chat_cli.py "2028年予想"` → 「推測です」明示の見立て
+- [x] `python chat_cli.py "学生でも参加できる？"` → インターン案内
+- [x] `python chat_cli.py "費用は？"` → 会員証NFT前提の案内
 
 ## ローカル公開モード確認
 
